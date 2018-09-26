@@ -12,8 +12,9 @@ pipeline {
             steps {
                 echo 'Develop branch'
                 sh '''
-                   git clone -b testing-dev --single-branch https://github.com/cargotracking/cargotracker.git
                    last_hash=$(git log -n 1 --pretty=format:'%h')
+
+                   git clone -b testing-dev --single-branch https://github.com/cargotracking/cargotracker.git
                    cd cargotracker
                    git checkout $last_hash
                    result=$?
