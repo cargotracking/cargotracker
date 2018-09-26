@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Check branch') {
             when {
-                branch 'testing'
+                branch 'testing-dev'
             }
             steps {
                 echo 'Develop branch'
