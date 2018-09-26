@@ -7,14 +7,9 @@ pipeline {
     stages {
         stage ('Check branch') {
             when {
-                expression { env.BRANCH == 'develop' }
+                branch 'develop'
             } steps {
                 echo 'Develop branch'
-            }
-            when {
-                expression { env.BRANCH != 'develop' }
-            } steps {
-                echo 'NOT develop branch'
             }
         }
         stage ('Initialize') {
