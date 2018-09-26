@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Check branch') {
             when {
-                environment name: 'CHANGE_TARGET', value: 'testing-dev'
+                environment name: 'CHANGE_TARGET', value: 'develop'
             }
             steps {
                 echo 'Develop branch'
