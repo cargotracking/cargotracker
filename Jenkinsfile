@@ -7,10 +7,12 @@ pipeline {
     stages {
         stage ('Check branch') {
             when {
-                branch 'develop'
+                branch 'testing'
             }
             steps {
                 echo 'Develop branch'
+                git branch: 'testing',
+                    url: 'https://github.com/cargotracking/cargotracker.git'
             }
         }
         stage ('Initialize') {
@@ -21,7 +23,6 @@ pipeline {
                 ''' 
             }
         }
-
         stage ('Build') {
             steps {
                 sh 'mvn install -DskipTests' 
