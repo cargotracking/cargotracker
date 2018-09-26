@@ -16,9 +16,7 @@ pipeline {
 
                    git clone -b testing-dev --single-branch https://github.com/cargotracking/cargotracker.git
                    cd cargotracker
-                   git checkout $last_hash
-                   result=$?
-                   echo "Result: $result"
+                   git checkout $last_hash # Fail if commit does not exist on "testing-dev" branch
                 '''
             }
         }
