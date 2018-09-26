@@ -8,7 +8,8 @@ pipeline {
         stage ('Check branch') {
             when {
                 branch 'develop'
-            } steps {
+            }
+            steps {
                 echo 'Develop branch'
             }
         }
