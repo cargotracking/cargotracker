@@ -5,17 +5,17 @@ pipeline {
         jdk 'jdk8' 
     }
     stages {
+        stage ('Branch') {
+            echo "Branch: ${env.BRANCH_NAME}"
+        }
         stage ('Check branch') {
+            when {
+                branch 'testing-dev'
+            }
             steps {
-            
-                when {
-                    branch 'testing-dev'
-                }
-                steps {
-                    echo 'Develop branch'
-                    git branch: 'testing',
-                        url: 'https://github.com/cargotracking/cargotracker.git'
-                }
+                echo 'Develop branch'
+                git branch: 'testing',
+                    url: 'https://github.com/cargotracking/cargotracker.git'
             }
         }
         stage ('Initialize') {
