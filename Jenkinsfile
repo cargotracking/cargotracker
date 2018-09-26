@@ -14,6 +14,13 @@ pipeline {
                 echo sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
                 git branch: 'testing',
                     url: 'https://github.com/cargotracking/cargotracker.git'
+                sh '''
+                   last_hash=git log -n 1 --pretty=format:'%h'
+                   cd cargotracker
+                   git checkout $last_hash
+                   result=$?
+                   echo "Result: $result"
+                '''
             }
         }
         stage ('Initialize') {
