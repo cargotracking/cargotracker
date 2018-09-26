@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Branch') {
             steps {
-                echo "branch: ${env.BRANCH_NAME}"
+                echo "branch: ${env.CHANGE_TARGET}"
             }
         }
         stage ('Check branch') {
