@@ -6,17 +6,16 @@ pipeline {
     }
     stages {
         stage ('Check branch') {
-            when {
-                branch 'testing-dev'
-            }
             steps {
-                echo 'Develop branch'
-                git branch: 'testing',
-                    url: 'https://github.com/cargotracking/cargotracker.git'
-            }
-
-            steps {
-                echo 'Branch: ' + ${env.BRANCH_NAME}
+            
+                when {
+                    branch 'testing-dev'
+                }
+                steps {
+                    echo 'Develop branch'
+                    git branch: 'testing',
+                        url: 'https://github.com/cargotracking/cargotracker.git'
+                }
             }
         }
         stage ('Initialize') {
