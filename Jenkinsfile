@@ -5,14 +5,9 @@ pipeline {
         jdk 'jdk8' 
     }
     stages {
-        stage ('Branch') {
-            steps {
-                echo "branch: ${env.CHANGE_TARGET}"
-            }
-        }
         stage ('Check branch') {
             when {
-                branch 'testing-dev'
+                environment name: 'CHANGE_TARGET', value: 'testing-dev'
             }
             steps {
                 echo 'Develop branch'
