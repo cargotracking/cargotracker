@@ -14,6 +14,10 @@ pipeline {
                 git branch: 'testing',
                     url: 'https://github.com/cargotracking/cargotracker.git'
             }
+
+            steps {
+                echo 'Branch: ' + ${env.BRANCH_NAME}
+            }
         }
         stage ('Initialize') {
             steps {
