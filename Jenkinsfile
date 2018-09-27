@@ -11,7 +11,7 @@ pipeline {
                     def branches = ['develop':'testing-dev', 'testing':'develop', 'testing-qa':'testing'];
                     def originBranch = branches.get(env.CHANGE_TARGET);
                     if(originBranch != null) {
-                        withEnv(['ORIGIN_BRANCH=$originBranch']) {
+                        withEnv(["ORIGIN_BRANCH=$originBranch"]) {
                             sh '''
                                 last_hash=$(git log -n 1 --pretty=format:'%h')
     
