@@ -10,6 +10,9 @@ pipeline {
                 script {
                     def branches = ['develop':'testing-dev', 'testing':'develop', 'testing-qa':'testing'];
                     def originBranch = branches.get(env.CHANGE_TARGET);
+
+                    println "Target branch is $env.CHANGE_TARGET"
+
                     if(originBranch != null) {
                         withEnv(["ORIGIN_BRANCH=$originBranch"]) {
                             sh '''
@@ -25,7 +28,7 @@ pipeline {
                             '''
                          }
                     } else {
-                        println "No need to check branches! (target is $env.CHANGE_TARGET)"
+                        println "No need to check branches!"
                     }
                 }
             }
