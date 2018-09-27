@@ -9,15 +9,16 @@ pipeline {
             steps {
                 script {
                     def branches = ['develop':'testing-dev', 'testing':'develop', 'testing-qa':'testing'];
-                    def originBranch = branches.get(env.CHANGE_TARGET);
+                    env.originBranch = branches.get(env.CHANGE_TARGET);
                     if(originBranch != null) {
                         sh '''
-                           last_hash=$(git log -n 1 --pretty=format:'%h')
+                            last_hash=$(git log -n 1 --pretty=format:'%h')
     
-                           # Ensure the commit comes is present on the desired previous branch
-                           git clone -b $originBranch --single-branch https://github.com/cargotracking/cargotracker.git
-                           cd cargotracker
-                           git checkout $last_hash
+                            # Ensure the commit comes is present on the desired previous branch
+                            echo $originBranch
+                            git clone -b $env.originBranch --single-branch https://github.com/cargotracking/cargotracker.git
+                            cd cargotracker
+                            git checkout $last_hash
                         '''
                     } else {
                         println "No need to check branches!"
