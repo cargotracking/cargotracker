@@ -17,6 +17,7 @@ pipeline {
     
                                 # Ensure the commit comes is present on the desired previous branch
                                 echo Cloning ${ORIGIN_BRANCH}
+                                rm -Rf cargotracker # Remove directory if exists
                                 git clone -b ${ORIGIN_BRANCH} --single-branch https://github.com/cargotracking/cargotracker.git
                                 cd cargotracker
                                 git checkout $last_hash
