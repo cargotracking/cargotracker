@@ -16,7 +16,7 @@ pipeline {
     
                             # Ensure the commit comes is present on the desired previous branch
                             echo $originBranch
-                            git clone -b $env.originBranch --single-branch https://github.com/cargotracking/cargotracker.git
+                            git clone -b ${env.originBranch} --single-branch https://github.com/cargotracking/cargotracker.git
                             cd cargotracker
                             git checkout $last_hash
                         '''
