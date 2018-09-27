@@ -23,7 +23,7 @@ pipeline {
                             '''
                          }
                     } else {
-                        println "No need to check branches!"
+                        println "No need to check branches! (target is $env.CHANGE_TARGET)"
                     }
                 }
             }
