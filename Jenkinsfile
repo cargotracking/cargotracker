@@ -6,18 +6,31 @@ pipeline {
     }
     stages {
         stage ('Check branch') {
-            when {
-                environment name: 'CHANGE_TARGET', value: 'develop'
-            }
             steps {
-                echo 'Develop branch'
-                sh '''
-                   last_hash=$(git log -n 1 --pretty=format:'%h')
+                script {
+                    def branches = ['develop':'testing-dev', 'testing':'develop', 'testing-qa':'testing'];
+                    def originBranch = branches.get(env.CHANGE_TARGET);
 
-                   git clone -b testing-dev --single-branch https://github.com/cargotracking/cargotracker.git
-                   cd cargotracker
-                   git checkout $last_hash # Fail if commit does not exist on "testing-dev" branch
-                '''
+                    println "Target branch is $env.CHANGE_TARGET"
+
+                    if(originBranch != null) {
+                        withEnv(["ORIGIN_BRANCH=$originBranch"]) {
+                            sh '''
+                                last_hash=$(git log -n 1 --pretty=format:'%h')
+    
+                                # Ensure the commit comes is present on the desired previous branch
+                                echo Cloning ${ORIGIN_BRANCH}
+                                # Remove directory if exists
+                                rm -Rf cargotracker
+                                git clone -b ${ORIGIN_BRANCH} --single-branch https://github.com/cargotracking/cargotracker.git
+                                cd cargotracker
+                                git checkout $last_hash
+                            '''
+                         }
+                    } else {
+                        println "No need to check branches!"
+                    }
+                }
             }
         }
         stage ('Initialize') {
