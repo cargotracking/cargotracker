@@ -6,19 +6,16 @@ pipeline {
     }
     stages {
         stage ('Check branch') {
-            when {
-                environment name: 'CHANGE_TARGET', value: 'develop'
-            }
-            steps {
-                echo 'Develop branch'
+            def branches = [ develop: 'testing-dev', testing: 'develop', testing-qa: 'testing'];
+            def originBranch = m.get(env.CHANGE_TARGET);
+            if(originBranch != null) {
                 sh '''
                    last_hash=$(git log -n 1 --pretty=format:'%h')
 
-                   git clone -b testing-dev --single-branch https://github.com/cargotracking/cargotracker.git
+                   # Ensure the commit comes is present on the desired previous branch
+                   git clone -b $originBranch --single-branch https://github.com/cargotracking/cargotracker.git
                    cd cargotracker
                    git checkout $last_hash
-                   result=$?
-                   echo "Result: $result"
                 '''
             }
         }
