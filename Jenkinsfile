@@ -5,7 +5,11 @@ pipeline {
         jdk 'jdk8' 
     }
     stages {
-        stage ('Check branch') 
+        stage ('Check branch') {
+            script {
+                def branches = [' develop':'testing-dev', 'testing':'develop', 'testing-qa':'testing'];
+                def originBranch = m.get(env.CHANGE_TARGET);
+            } 
         }
         stage ('Initialize') {
             steps {
