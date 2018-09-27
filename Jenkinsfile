@@ -19,6 +19,8 @@ pipeline {
                            cd cargotracker
                            git checkout $last_hash
                         '''
+                    } else {
+                        println "No need to check branches!"
                     }
                 }
             }
