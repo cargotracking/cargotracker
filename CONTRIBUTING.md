@@ -3,7 +3,7 @@
 ---
 
 # Source Code Submissions 
-We welcome your contributions and look forward to collaborating with you. We can only accept source code repository 
+we welcome your contributions and look forward to collaborating with you. We can only accept source code repository 
 submissions from users who have signed and returned the Oracle 
 Contributor Agreement. You will find details and the agreement to sign at this OTN web page: 
 [Oracle Contributor Agreement](http://www.oracle.com/technetwork/community/oca-486395.html). 
