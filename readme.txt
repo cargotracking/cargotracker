@@ -4,7 +4,7 @@
 ================================================================================
 
 Overview
-========
+=================
 The project demonstrates how you can develop applications with the Java EE 
 platform using widely adopted architectural best practices like Domain-Driven 
 Design (DDD), TDD and agile. The project is directly based on the well known 
